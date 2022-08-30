@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">HockeyScoreSheet</string>
+    <string name="app_name">GameDayOps</string>
+    <string name="goal">Goal</string>
+    <string name="scoring">Scoring</string>
+    <string name="penalty">Penalty</string>
+    <string name="penalties">Penalties</string>
 </resources>

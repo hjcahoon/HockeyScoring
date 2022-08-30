@@ -1,6 +1,5 @@
 package com.indigocat.hockeyscoresheet.ui.theme
 
-import android.graphics.Paint
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -40,6 +39,6 @@ val typography = Typography(
         lineHeight = 56.sp,
         letterSpacing = 0.sp,
         textAlign = TextAlign.Center
-    )
+    ),
 
 )

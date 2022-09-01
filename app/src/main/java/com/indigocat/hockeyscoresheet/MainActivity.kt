@@ -98,7 +98,6 @@ fun TeamInfo(
             alpha = 0.2f
         )
         Column(
-            modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Score(currentScore = 3)
@@ -106,7 +105,6 @@ fun TeamInfo(
             ShotButton()
         }
     }
-
 }
 
 @Composable

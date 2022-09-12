@@ -5,13 +5,26 @@ data class Player(
     val givenName: String,
     val familyName: String,
     val number: Int = -1,
-    val position: String? = null
+    val position: Position? = null
 ) {
     companion object {
         fun defaultPlayer(): Player {
-            return Player("","", "")
+            return Player("-1             ","", "")
+        }
+
+        fun benchPlayer(): Player {
+            return Player("-99","Bench", "")
         }
     }
+
+    val displayPlayer = "$number $givenName $familyName"
+}
+
+enum class Position() {
+    GOALIE,
+    SKATER,
+    FORWARD,
+    DEFENCE
 }
 
 

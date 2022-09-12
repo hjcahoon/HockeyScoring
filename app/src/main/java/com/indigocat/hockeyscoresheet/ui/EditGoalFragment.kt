@@ -4,15 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
@@ -20,9 +14,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.indigocat.hockeyscoresheet.R
 import com.indigocat.hockeyscoresheet.data.model.Player
+import com.indigocat.hockeyscoresheet.data.model.PointType
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+
 
 class GoalEditFragment: Fragment() {
 
@@ -42,8 +39,12 @@ class GoalEditFragment: Fragment() {
 }
 
 @Composable
-fun EditGoalContent() {
-    Surface(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+fun EditGoalContent(viewModel: EditGoalViewModel = hiltViewModel()) {
+    Surface(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp)
+    ) {
+
         Column {
 
             Row(
@@ -58,21 +59,25 @@ fun EditGoalContent() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Label(stringResourceId = R.string.goal_scorer)
-                PlayerPoint()
+                AutoCompletePlayerTextView(
+                    defaultPlayer = Player.defaultPlayer(),
+                    suggestions = viewModel.game.value?.homeTeam?.players ?: emptyList(),
+                    modifier = Modifier,
+                    onPlayerSelected = viewModel::onPlayerSelected,
+                    pointType = PointType.GOAL
+                )
             }
             Row(
                 Modifier.padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Label(stringResourceId = R.string.assist_1)
-                PlayerPoint()
             }
             Row(
                 Modifier.padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Label(stringResourceId = R.string.assist_2)
-                PlayerPoint()
             }
         }
 
@@ -96,37 +101,6 @@ fun Label(stringResourceId: Int) {
 }
 
 @Composable
-fun PlayerPoint() {
-    Button(
-        onClick = {  },
-        modifier = Modifier.padding(horizontal = 8.dp)
-    ) {
-        
-    }
-}
-
-@Composable
-fun PlayerSelector(list: List<Player>) {
-    val expanded = remember { mutableStateOf(false) }
-    val selectedPlayer = rememberSaveable {
-        mutableStateOf(Player.defaultPlayer())
-    }
-    DropdownMenu(
-        expanded = expanded.value,
-        onDismissRequest = { expanded.value = false }
-    ) {
-        list.forEach { player ->
-            DropdownMenuItem(
-                text = { PlayerName(player = player) },
-                onClick = { selectedPlayer.value = player }
-            )
-        }
-    }
-
-}
-
-
-@Composable
 fun PlayerName(player: Player) {
     val playerName =
         if (player.number != -1) {
@@ -144,6 +118,42 @@ fun PlayerName(player: Player) {
             )
         }
     Text(text = playerName)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AutoCompletePlayerTextView(
+    defaultPlayer: Player,
+    suggestions: List<Player>,
+    modifier: Modifier,
+    onPlayerSelected: (String, PointType) -> Unit,
+    label: @Composable (()-> Unit)? = null,
+    pointType: PointType
+) {
+    Column(modifier = modifier) {
+        var selectedPlayer = defaultPlayer
+        OutlinedTextField(
+            value = selectedPlayer.displayPlayer,
+            onValueChange = { selectedPlayer = defaultPlayer },
+            modifier = Modifier.fillMaxWidth(),
+            label = label
+        )
+        DropdownMenu(
+            expanded = suggestions.isNotEmpty(),
+            onDismissRequest = {  },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            suggestions.forEach { player ->
+                DropdownMenuItem(
+                    text = { PlayerName(player = player) },
+                    onClick = {
+                        onPlayerSelected(player.id, pointType)
+                        selectedPlayer = player
+                      }
+                )
+            }
+        }
+    }
 }
 
 

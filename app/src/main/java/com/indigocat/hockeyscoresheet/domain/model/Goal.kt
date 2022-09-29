@@ -1,7 +1,8 @@
-package com.indigocat.hockeyscoresheet.data.model
+package com.indigocat.hockeyscoresheet.domain.model
 
 data class Goal(
-    val time: String,
+    val period: Int,
+    val time: Int,
     val scorer: Player,
     val assist1: Player?,
     val assist2: Player?,

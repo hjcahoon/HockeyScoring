@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.data.model
+package com.indigocat.hockeyscoresheet.domain.model
 
 data class Player(
     val id: String,
@@ -9,7 +9,7 @@ data class Player(
 ) {
     companion object {
         fun defaultPlayer(): Player {
-            return Player("-1             ","", "")
+            return Player("-1","", "")
         }
 
         fun benchPlayer(): Player {

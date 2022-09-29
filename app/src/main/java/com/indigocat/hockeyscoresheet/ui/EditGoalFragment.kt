@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.indigocat.hockeyscoresheet.R
-import com.indigocat.hockeyscoresheet.data.model.Player
-import com.indigocat.hockeyscoresheet.data.model.PointType
+import com.indigocat.hockeyscoresheet.domain.model.Player
+import com.indigocat.hockeyscoresheet.domain.model.PointType
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
 
 
@@ -159,7 +159,7 @@ fun AutoCompletePlayerTextView(
 
 @Composable
 @Preview(showBackground = true)
-fun DefaultPreview() {
+fun Preview() {
     HockeyScoreSheetTheme {
         EditGoalContent()
     }

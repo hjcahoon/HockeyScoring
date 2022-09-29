@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.data.model
+package com.indigocat.hockeyscoresheet.domain.model
 
 data class Game(
     val id: String,
@@ -7,5 +7,7 @@ data class Game(
     val awayTeam: Team,
     val facility: Facility?,
     val rink: String?,
-    val startTime: String
+    val startTime: String,
+    val goals: List<Goal>?,
+    val penalties: List<Penalty>
 )

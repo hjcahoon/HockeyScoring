@@ -6,11 +6,20 @@
     <string name="penalties">Penalties</string>
 
     <string name="player_name">%1$s %2$s</string>
-    <string name="player_name_and_number">%1$d: %2$s %3$s</string>
+    <string name="player_family_name">%1$s</string>
+    <string name="player_name_and_number">#%1$d %2$s. %3$s</string>
+    <string name="player_family_name_and_number">#%1$d %2$s</string>
     <string name="none_selected">None Selected</string>
 
     <string name="time_of_goal">Time of Goal</string>
     <string name="goal_scorer">Goal Scorer</string>
     <string name="assist_1">First Assist</string>
     <string name="assist_2">Second Assist</string>
+    <string name="time_in_period">%1$d:%2$d</string>
+    <string name="period">Period %1$s</string>
+
+    <string name="even_strength_abbv">ES</string>
+    <string name="power_play_abbv">PP</string>
+    <string name="short_handed_abbv">SH</string>
+    <string name="empty_net_abbv">EN</string>
 </resources>

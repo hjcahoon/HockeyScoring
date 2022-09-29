@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.data.model
+package com.indigocat.hockeyscoresheet.domain.model
 
 data class League(
     val id: String,

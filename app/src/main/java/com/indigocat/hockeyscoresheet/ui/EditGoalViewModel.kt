@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.indigocat.hockeyscoresheet.data.model.Game
-import com.indigocat.hockeyscoresheet.data.model.PointType
+import com.indigocat.hockeyscoresheet.domain.model.Game
+import com.indigocat.hockeyscoresheet.domain.model.PointType
 import com.indigocat.hockeyscoresheet.data.repository.GameRepository
 import kotlinx.coroutines.launch
 

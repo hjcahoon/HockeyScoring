@@ -1,16 +1,14 @@
-package com.indigocat.hockeyscoresheet.data.model
+package com.indigocat.hockeyscoresheet.domain.model
 
 data class Penalty(
     val id: String,
-    val startTime: String,
-    val endTime: String? = null,
+    val period: Int,
+    val startTime: Int,
     val player: Player,
-    val servedBy: Player?,
-    val penaltyLength: String,
-    val length: PenaltyLength,
+    val type: PenaltyType,
     val infraction: Infraction,
-
-
+    val servedBy: Player? = null,
+    val endTime: String? = null,
 )
 
 enum class Infraction {

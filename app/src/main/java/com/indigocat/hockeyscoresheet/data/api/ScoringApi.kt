@@ -1,6 +1,6 @@
-package com.indigocat.hockeyscoresheet.network
+package com.indigocat.hockeyscoresheet.data.api
 
-import com.indigocat.hockeyscoresheet.data.model.Game
+import com.indigocat.hockeyscoresheet.domain.model.Game
 import retrofit2.http.GET
 
 interface ScoringApi {

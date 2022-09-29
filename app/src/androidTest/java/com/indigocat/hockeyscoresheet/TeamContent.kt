@@ -1,9 +1,9 @@
 package com.indigocat.hockeyscoresheet
 
-import com.indigocat.hockeyscoresheet.data.model.Division
-import com.indigocat.hockeyscoresheet.data.model.Game
-import com.indigocat.hockeyscoresheet.data.model.League
-import com.indigocat.hockeyscoresheet.data.model.Team
+import com.indigocat.hockeyscoresheet.domain.model.Division
+import com.indigocat.hockeyscoresheet.domain.model.Game
+import com.indigocat.hockeyscoresheet.domain.model.League
+import com.indigocat.hockeyscoresheet.domain.model.Team
 
 object TeamContent {
 

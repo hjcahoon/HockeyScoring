@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Penalty(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val gameId: String,
     val player: String,

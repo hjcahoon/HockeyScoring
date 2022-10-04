@@ -22,4 +22,7 @@
     <string name="power_play_abbv">PP</string>
     <string name="short_handed_abbv">SH</string>
     <string name="empty_net_abbv">EN</string>
+
+    <string name="select_player">Select Player</string>
+    <string name="bench_penalty">Bench Penalty</string>
 </resources>

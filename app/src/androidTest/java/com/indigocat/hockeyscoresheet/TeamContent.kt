@@ -42,6 +42,8 @@ object TeamContent {
         awayTeam = avalanche,
         facility = MonarchContent.sportStable,
         startTime = "2022-10-01T19:30:00+6:00",
-        rink = "West"
+        rink = "West",
+        goals = emptyList(),
+        penalties = emptyList()
     )
 }

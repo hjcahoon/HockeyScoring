@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class FacilityRinks(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val facilityId: String,
     val rink: String

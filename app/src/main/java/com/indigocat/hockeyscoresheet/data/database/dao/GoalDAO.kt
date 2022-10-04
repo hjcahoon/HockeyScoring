@@ -11,7 +11,7 @@ interface GoalDao {
     @Insert
     fun insert(goal: Goal)
 
-    @Query("SELECT * FROM goal WHERE game IS :gameId")
+    @Query("SELECT * FROM goal WHERE gameId IS :gameId")
     fun getGoalsForGame(gameId: Int): List<Goal>
 
     @Query("SELECT * FROM goal WHERE goalScorer IS :playerId")

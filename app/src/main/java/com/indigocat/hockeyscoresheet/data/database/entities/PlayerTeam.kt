@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class PlayerTeam(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val teamId: String,
     val playerId: String

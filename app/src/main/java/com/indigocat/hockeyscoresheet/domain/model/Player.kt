@@ -4,7 +4,7 @@ data class Player(
     val id: String,
     val givenName: String,
     val familyName: String,
-    val number: Int = -1,
+    val number: Int? = null,
     val position: Position? = null
 ) {
     companion object {
@@ -16,11 +16,9 @@ data class Player(
             return Player("-99","Bench", "")
         }
     }
-
-    val displayPlayer = "$number $givenName $familyName"
 }
 
-enum class Position() {
+enum class Position {
     GOALIE,
     SKATER,
     FORWARD,

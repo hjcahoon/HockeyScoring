@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class AssistantCoachTeam(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val teamId: Int,
     val personId: Int

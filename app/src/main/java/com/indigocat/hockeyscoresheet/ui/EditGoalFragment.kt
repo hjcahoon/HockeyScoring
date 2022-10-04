@@ -7,18 +7,22 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.indigocat.hockeyscoresheet.R
+import com.indigocat.hockeyscoresheet.domain.extensions.getNumberAndName
 import com.indigocat.hockeyscoresheet.domain.model.Player
 import com.indigocat.hockeyscoresheet.domain.model.PointType
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import timber.log.Timber
 
 
 class GoalEditFragment: Fragment() {
@@ -39,14 +43,13 @@ class GoalEditFragment: Fragment() {
 }
 
 @Composable
-fun EditGoalContent(viewModel: EditGoalViewModel = hiltViewModel()) {
+fun EditGoalContent() {
     Surface(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)
     ) {
 
         Column {
-
             Row(
                 Modifier.padding(bottom = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -59,12 +62,20 @@ fun EditGoalContent(viewModel: EditGoalViewModel = hiltViewModel()) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Label(stringResourceId = R.string.goal_scorer)
+                val players =  listOf(
+                    Player("1124", "Jack", "Davila", 15),
+                    Player("1123", "Vincent", "Felt", 10),
+                    Player("1126", "Jackson", "Brotski", 10),
+                    Player("2101", "Good", "Goalie", 30)
+                )
+
                 AutoCompletePlayerTextView(
-                    defaultPlayer = Player.defaultPlayer(),
-                    suggestions = viewModel.game.value?.homeTeam?.players ?: emptyList(),
+                    defaultPlayer = Player("1123", "Vincent", "Felt", 10),
+                    suggestions = players,
                     modifier = Modifier,
-                    onPlayerSelected = viewModel::onPlayerSelected,
-                    pointType = PointType.GOAL
+                    onPlayerSelected = onPlayerSelected,
+                    pointType = PointType.GOAL,
+                    label = { Text(stringResource(id = R.string.goal_scorer)) }
                 )
             }
             Row(
@@ -80,7 +91,6 @@ fun EditGoalContent(viewModel: EditGoalViewModel = hiltViewModel()) {
                 Label(stringResourceId = R.string.assist_2)
             }
         }
-
     }
 }
 
@@ -88,7 +98,8 @@ fun EditGoalContent(viewModel: EditGoalViewModel = hiltViewModel()) {
 fun GoalTime() {
     Text(
         text= "12:32",
-        style = MaterialTheme.typography.labelMedium,
+        Modifier.padding(4.dp,0.dp),
+        style = MaterialTheme.typography.labelMedium
     )
 }
 
@@ -100,25 +111,7 @@ fun Label(stringResourceId: Int) {
     )
 }
 
-@Composable
-fun PlayerName(player: Player) {
-    val playerName =
-        if (player.number != -1) {
-            stringResource(
-                R.string.player_name_and_number,
-                player.number,
-                player.givenName,
-                player.familyName
-            )
-        } else {
-            stringResource(
-                id = R.string.player_name,
-                player.givenName,
-                player.familyName
-            )
-        }
-    Text(text = playerName)
-}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -132,28 +125,37 @@ fun AutoCompletePlayerTextView(
 ) {
     Column(modifier = modifier) {
         var selectedPlayer = defaultPlayer
+        val showDropdown = rememberSaveable { mutableStateOf(false) }
+
         OutlinedTextField(
-            value = selectedPlayer.displayPlayer,
+            value = selectedPlayer.getNumberAndName(LocalContext.current),
             onValueChange = { selectedPlayer = defaultPlayer },
             modifier = Modifier.fillMaxWidth(),
-            label = label
+            label = label,
         )
-        DropdownMenu(
-            expanded = suggestions.isNotEmpty(),
-            onDismissRequest = {  },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            suggestions.forEach { player ->
-                DropdownMenuItem(
-                    text = { PlayerName(player = player) },
-                    onClick = {
-                        onPlayerSelected(player.id, pointType)
-                        selectedPlayer = player
-                      }
-                )
+        if (showDropdown.value) {
+            DropdownMenu(
+                expanded = suggestions.isNotEmpty(),
+                onDismissRequest = { },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                suggestions.forEach { player ->
+                    DropdownMenuItem(
+                        text = { Text(player.getNumberAndName(LocalContext.current)) },
+                        onClick = {
+                            onPlayerSelected(player.id, pointType)
+                            selectedPlayer = player
+                        }
+                    )
+                }
             }
         }
     }
+}
+
+val onPlayerSelected = {
+    playerId: String, pointType: PointType ->
+    Timber.d("Selected $playerId goalType $pointType")
 }
 
 

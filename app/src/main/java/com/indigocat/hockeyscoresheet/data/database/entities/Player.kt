@@ -6,7 +6,8 @@ import com.indigocat.hockeyscoresheet.domain.model.Position
 
 @Entity
 data class Player(
-    @PrimaryKey(autoGenerate = true) val uid: String,
+    @PrimaryKey
+    val uid: String,
     val givenName: String?,
     val familyName: String?,
     val number: Int?,

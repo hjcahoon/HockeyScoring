@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Goal(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val goalScorer: String,
     val assist1: String? = null,

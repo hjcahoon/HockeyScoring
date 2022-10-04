@@ -5,13 +5,13 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Game(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
-    val homeTeam: Int,
-    val awayTeam: Int,
+    val homeTeam: String,
+    val awayTeam: String,
     val dateTime: String,
-    val location: Int,
-    val rink: String,
-    val goals: List<Goal>,
-    val penalties: List<Penalty>
+    val location: String,
+    val division: String? = null,
+    val rink: String
 )
+

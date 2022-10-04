@@ -3,7 +3,7 @@ buildscript {
         compose_version = '1.2.1'
         lifecycle_version = '2.5.1'
         hilt_version = '2.40.1'
-        detekt_version = '1.21.0'
+        detekt_version = '1.22.0-RC1'
         ktlint_version = '0.31.0'
     }
 

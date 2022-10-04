@@ -4,7 +4,7 @@ import android.content.Context
 import com.indigocat.hockeyscoresheet.R
 import com.indigocat.hockeyscoresheet.domain.model.Player
 
-
+@Suppress("MagicNumber")
 fun Player.getNumberAndName(context: Context) : String {
     return if (this.number != null) {
         when (number) {
@@ -23,6 +23,7 @@ fun Player.getNumberAndName(context: Context) : String {
 
 }
 
+@Suppress("MagicNumber")
 fun Player.getNumberAndFamilyName(context: Context) : String {
     return if (this.number != null) {
         when (number) {

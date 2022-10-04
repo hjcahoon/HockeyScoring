@@ -49,11 +49,12 @@ enum class PenaltyType {
     PenaltyShot
 }
 
+@Suppress("MagicNumber")
 enum class PenaltyLength(seconds: Int) {
     OneMinute(60),
     OneMinute30Seconds(90),
     TwoMinutes(120),
     FiveMinutes(3000),
-    TenMinutes(6000),
+    TenMinutes(6000)
 }
 

@@ -4,8 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.indigocat.hockeyscoresheet.data.database.dao.*
-import com.indigocat.hockeyscoresheet.data.database.entities.*
+import com.indigocat.hockeyscoresheet.data.database.dao.FacilityDao
+import com.indigocat.hockeyscoresheet.data.database.dao.GameDao
+import com.indigocat.hockeyscoresheet.data.database.dao.GoalDao
+import com.indigocat.hockeyscoresheet.data.database.dao.PenaltyDao
+import com.indigocat.hockeyscoresheet.data.database.dao.PlayerDao
+import com.indigocat.hockeyscoresheet.data.database.dao.PlayerTeamDao
+import com.indigocat.hockeyscoresheet.data.database.dao.TeamDao
+import com.indigocat.hockeyscoresheet.data.database.entities.AssistantCoachTeam
+import com.indigocat.hockeyscoresheet.data.database.entities.Facility
+import com.indigocat.hockeyscoresheet.data.database.entities.FacilityRinks
+import com.indigocat.hockeyscoresheet.data.database.entities.Game
+import com.indigocat.hockeyscoresheet.data.database.entities.Goal
+import com.indigocat.hockeyscoresheet.data.database.entities.Penalty
+import com.indigocat.hockeyscoresheet.data.database.entities.Person
+import com.indigocat.hockeyscoresheet.data.database.entities.Player
+import com.indigocat.hockeyscoresheet.data.database.entities.PlayerTeam
+import com.indigocat.hockeyscoresheet.data.database.entities.Team
 import kotlinx.coroutines.CoroutineScope
 
 @Database(

@@ -8,5 +8,4 @@ data class Team(
     val assistantCoaches: List<Person>?,
     val players: List<Player>?,
     val games: List<Game>
-){
-}
+)

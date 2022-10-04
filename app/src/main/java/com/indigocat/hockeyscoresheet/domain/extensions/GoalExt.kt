@@ -5,9 +5,6 @@ import com.indigocat.hockeyscoresheet.R
 import com.indigocat.hockeyscoresheet.domain.model.Goal
 import com.indigocat.hockeyscoresheet.domain.model.PlayType
 
-class GoalExt {
-}
-
 fun Goal.getAbbreviatedType(context: Context): String {
     return when(this.goalType) {
         PlayType.EvenStrength -> context.getString(R.string.even_strength_abbv)

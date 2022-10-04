@@ -1,0 +1,52 @@
+def outputDir = "${project.rootDir}/build/outputs"
+
+check.dependsOn 'lint', 'detekt'
+
+//android {
+//    lintOptions {
+//        lintConfig file("lint-config.xml")
+//    }
+//}
+
+
+configurations {
+    ktlint
+}
+
+detekt {
+    toolVersion = detekt_version
+    parallel = true
+    config = files("$projectDir/detekt-config.yml")
+    debug = true
+    basePath = projectDir
+
+}
+
+task format(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    mainClass = "com.github.shyiko.ktlint.Main"
+}
+
+
+dependencies {
+    ktlint "com.github.shyiko:ktlint:$ktlint_version"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0"
+}
+
+tasks.named("detekt").configure {
+    reports {
+
+        // Enable/Disable HTML report (default: true)
+        html.required.set(true)
+        html.outputLocation.set(file("build/outputs/reports/detekt.html"))
+        txt.required.set(false)
+        xml.required.set(false)
+
+        custom {
+            // The simple class name of your custom report.
+            reportId = "DetektReport"
+            outputLocation.set(file("build/outputs/reports/detekt.json"))
+        }
+    }
+}

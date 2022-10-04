@@ -38,7 +38,6 @@ enum class Infraction {
     Spearing,
     ThrowingStickOrObject,
     Tripping
-
 }
 
 enum class PenaltyType {

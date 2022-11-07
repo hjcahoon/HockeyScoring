@@ -1,9 +1,9 @@
 package com.indigocat.hockeyscoresheet
 
-import com.indigocat.hockeyscoresheet.domain.model.Facility
-import com.indigocat.hockeyscoresheet.domain.model.Person
-import com.indigocat.hockeyscoresheet.domain.model.Player
-import com.indigocat.hockeyscoresheet.domain.model.Position
+import com.indigocat.hockeyscoresheet.data.api.model.Facility
+import com.indigocat.hockeyscoresheet.data.api.model.Person
+import com.indigocat.hockeyscoresheet.data.api.model.Player
+import com.indigocat.hockeyscoresheet.data.api.model.Position
 
 object Avalanche {
     val headCoach = Person(

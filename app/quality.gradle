@@ -19,7 +19,6 @@ detekt {
     config = files("$projectDir/detekt-config.yml")
     debug = true
     basePath = projectDir
-
 }
 
 task format(type: JavaExec, group: "formatting") {

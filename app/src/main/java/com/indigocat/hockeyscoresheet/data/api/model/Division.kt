@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.domain.model
+package com.indigocat.hockeyscoresheet.data.api.model
 
 data class Division(
     val id: String,

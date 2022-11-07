@@ -1,9 +1,9 @@
-package com.indigocat.hockeyscoresheet.domain.extensions
+package com.indigocat.hockeyscoresheet.ui.extensions
 
 import android.content.Context
 import com.indigocat.hockeyscoresheet.R
-import com.indigocat.hockeyscoresheet.domain.model.Goal
-import com.indigocat.hockeyscoresheet.domain.model.PlayType
+import com.indigocat.hockeyscoresheet.data.api.model.Goal
+import com.indigocat.hockeyscoresheet.data.api.model.PlayType
 
 fun Goal.getAbbreviatedType(context: Context): String {
     return when(this.goalType) {

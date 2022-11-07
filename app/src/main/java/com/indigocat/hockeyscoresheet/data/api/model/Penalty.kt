@@ -1,7 +1,8 @@
-package com.indigocat.hockeyscoresheet.domain.model
+package com.indigocat.hockeyscoresheet.data.api.model
 
 data class Penalty(
     val id: String,
+    val gameId: String,
     val period: Int,
     val startTime: Int,
     val player: Player,

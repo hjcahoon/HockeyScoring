@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class PlayerTeam(
+data class PlayerAndTeam(
     @PrimaryKey
-    val id: String,
+    val id: Int,
     val teamId: String,
     val playerId: String
 )

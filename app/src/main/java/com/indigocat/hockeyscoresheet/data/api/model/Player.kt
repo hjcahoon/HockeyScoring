@@ -1,11 +1,11 @@
-package com.indigocat.hockeyscoresheet.domain.model
+package com.indigocat.hockeyscoresheet.data.api.model
 
 data class Player(
     val id: String,
     val givenName: String,
     val familyName: String,
     val number: Int? = null,
-    val position: Position? = null
+    val position: String? = null
 ) {
     companion object {
         fun defaultPlayer(): Player {

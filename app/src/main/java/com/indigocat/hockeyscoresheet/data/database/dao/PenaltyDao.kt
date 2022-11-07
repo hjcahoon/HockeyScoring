@@ -12,9 +12,9 @@ interface PenaltyDao {
     fun insert(penalty: Penalty)
 
     @Query("SELECT * FROM penalty WHERE gameId IS :gameId")
-    fun getPenaltiesForGame(gameId: Int): List<Penalty>
+    fun getPenaltiesForGame(gameId: String): List<Penalty>
 
     @Query("SELECT * FROM penalty WHERE player is :playerId")
-    fun getPenaltiesForPlayer(playerId: Int): List<Penalty>
+    fun getPenaltiesForPlayer(playerId: String): List<Penalty>
 
 }

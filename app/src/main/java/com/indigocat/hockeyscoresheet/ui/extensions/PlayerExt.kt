@@ -1,8 +1,8 @@
-package com.indigocat.hockeyscoresheet.domain.extensions
+package com.indigocat.hockeyscoresheet.ui.extensions
 
 import android.content.Context
 import com.indigocat.hockeyscoresheet.R
-import com.indigocat.hockeyscoresheet.domain.model.Player
+import com.indigocat.hockeyscoresheet.data.api.model.Player
 
 @Suppress("MagicNumber")
 fun Player.getNumberAndName(context: Context) : String {

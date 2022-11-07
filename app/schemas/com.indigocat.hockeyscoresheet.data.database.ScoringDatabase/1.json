@@ -2,15 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "33c5ba82b0fea3b9094877fb3e5b8b7a",
+    "identityHash": "58bd3a632e99b21edad9b53c9cb8c1e1",
     "entities": [
       {
         "tableName": "Player",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` TEXT NOT NULL, `givenName` TEXT, `familyName` TEXT, `number` INTEGER, `position` TEXT, PRIMARY KEY(`uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `givenName` TEXT, `familyName` TEXT, `number` INTEGER, `position` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "uid",
-            "columnName": "uid",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -41,126 +41,6 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "uid"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "AssistantCoachTeam",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `teamId` INTEGER NOT NULL, `personId` INTEGER NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "teamId",
-            "columnName": "teamId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "personId",
-            "columnName": "personId",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Facility",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT, `streetAddress` TEXT NOT NULL, `city` TEXT NOT NULL, `state` TEXT NOT NULL, `zipCode` TEXT NOT NULL, `description` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "streetAddress",
-            "columnName": "streetAddress",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "city",
-            "columnName": "city",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "state",
-            "columnName": "state",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "zipCode",
-            "columnName": "zipCode",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "description",
-            "columnName": "description",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "FacilityRinks",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `facilityId` TEXT NOT NULL, `rink` TEXT NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "facilityId",
-            "columnName": "facilityId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "rink",
-            "columnName": "rink",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
             "id"
           ],
           "autoGenerate": false
@@ -170,7 +50,7 @@
       },
       {
         "tableName": "Game",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `homeTeam` TEXT NOT NULL, `awayTeam` TEXT NOT NULL, `dateTime` TEXT NOT NULL, `location` TEXT NOT NULL, `division` TEXT, `rink` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `homeTeamId` TEXT NOT NULL, `awayTeamId` TEXT NOT NULL, `dateTime` TEXT, `homeScore` INTEGER, `awayScore` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -179,14 +59,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "homeTeam",
-            "columnName": "homeTeam",
+            "fieldPath": "homeTeamId",
+            "columnName": "homeTeamId",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "awayTeam",
-            "columnName": "awayTeam",
+            "fieldPath": "awayTeamId",
+            "columnName": "awayTeamId",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -194,219 +74,19 @@
             "fieldPath": "dateTime",
             "columnName": "dateTime",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "location",
-            "columnName": "location",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "division",
-            "columnName": "division",
-            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "rink",
-            "columnName": "rink",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Goal",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `goalScorer` TEXT NOT NULL, `assist1` TEXT, `assist2` TEXT, `time` INTEGER NOT NULL, `period` INTEGER NOT NULL, `gameId` TEXT NOT NULL, `apposingGoalie` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "goalScorer",
-            "columnName": "goalScorer",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "assist1",
-            "columnName": "assist1",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "assist2",
-            "columnName": "assist2",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "time",
-            "columnName": "time",
+            "fieldPath": "homeScore",
+            "columnName": "homeScore",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
-            "fieldPath": "period",
-            "columnName": "period",
+            "fieldPath": "awayScore",
+            "columnName": "awayScore",
             "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "gameId",
-            "columnName": "gameId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "apposingGoalie",
-            "columnName": "apposingGoalie",
-            "affinity": "TEXT",
             "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Penalty",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `gameId` TEXT NOT NULL, `player` TEXT NOT NULL, `time` INTEGER NOT NULL, `period` INTEGER NOT NULL, `infraction` TEXT NOT NULL, `servedBy` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "gameId",
-            "columnName": "gameId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "player",
-            "columnName": "player",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "time",
-            "columnName": "time",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "period",
-            "columnName": "period",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "infraction",
-            "columnName": "infraction",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "servedBy",
-            "columnName": "servedBy",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Person",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `givenName` TEXT NOT NULL, `familyName` TEXT NOT NULL, `email` TEXT, `phone` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "givenName",
-            "columnName": "givenName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "familyName",
-            "columnName": "familyName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "email",
-            "columnName": "email",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "phone",
-            "columnName": "phone",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "PlayerTeam",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `teamId` TEXT NOT NULL, `playerId` TEXT NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "teamId",
-            "columnName": "teamId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "playerId",
-            "columnName": "playerId",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -420,7 +100,7 @@
       },
       {
         "tableName": "Team",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `nickname` TEXT, `headCoach` TEXT, `facility` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `nickname` TEXT, `headCoach` TEXT, `venue` TEXT, `wins` INTEGER NOT NULL, `losses` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -447,10 +127,54 @@
             "notNull": false
           },
           {
-            "fieldPath": "facility",
-            "columnName": "facility",
+            "fieldPath": "venue",
+            "columnName": "venue",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "wins",
+            "columnName": "wins",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "losses",
+            "columnName": "losses",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "PlayerAndTeam",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `teamId` TEXT NOT NULL, `playerId` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "teamId",
+            "columnName": "teamId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerId",
+            "columnName": "playerId",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -466,7 +190,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '33c5ba82b0fea3b9094877fb3e5b8b7a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '58bd3a632e99b21edad9b53c9cb8c1e1')"
     ]
   }
 }

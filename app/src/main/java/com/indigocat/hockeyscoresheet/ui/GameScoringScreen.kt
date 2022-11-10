@@ -1,9 +1,5 @@
 package com.indigocat.hockeyscoresheet.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -12,10 +8,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
 import com.indigocat.hockeyscoresheet.data.api.model.Goal
 import com.indigocat.hockeyscoresheet.data.api.model.Infraction
 import com.indigocat.hockeyscoresheet.data.api.model.Penalty
@@ -29,25 +23,8 @@ import com.indigocat.hockeyscoresheet.ui.components.ScoringList
 import com.indigocat.hockeyscoresheet.ui.components.TeamInfo
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
 
-class GameScoringFragment: Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            setContent {
-                HockeyScoreSheetTheme {
-                    ScoreGameContent()
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun ScoreGameContent() {
+fun ScoreGameScreen() {
     Surface(
         color = MaterialTheme.colorScheme.background
     ) {
@@ -130,7 +107,7 @@ fun ColumnHeader(title: String) {
 @Composable
 fun ScoreGamePreview() {
     HockeyScoreSheetTheme {
-        ScoreGameContent()
+        ScoreGameScreen()
     }
 }
 

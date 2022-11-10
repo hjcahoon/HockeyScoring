@@ -65,6 +65,7 @@ kapt {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def navigation_version = "2.5.3"
     def room_version = "2.4.3"
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/game_fragment"
+    android:id="@+id/game">
+
+    <fragment
+        android:id="@+id/game_fragment"
+        android:name="com.indigocat.hockeyscoresheet.ui.GameFragment"
+        android:label="Game Fragment"/>
+
+    <fragment
+        android:id="@+id/game_scoring_fragment"
+        android:name="com.indigocat.hockeyscoresheet.ui.GameScoringFragment"
+        android:label="Game Scoring"/>
+
+
+</navigation>

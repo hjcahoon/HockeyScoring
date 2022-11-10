@@ -20,7 +20,7 @@ import com.indigocat.hockeyscoresheet.data.database.entities.Team
         //Facility::class,  FacilityRinks::class
     ],
     version = 1)
-abstract class ScoringDatabase: RoomDatabase() {
+abstract class GameDayDatabase: RoomDatabase() {
 
     abstract fun playerDao(): PlayerDao
     abstract fun gameDao(): GameDao
@@ -32,15 +32,15 @@ abstract class ScoringDatabase: RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: ScoringDatabase? = null
+        private var INSTANCE: GameDayDatabase? = null
 
         fun getDatabase(
             context: Context
-        ): ScoringDatabase {
+        ): GameDayDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ScoringDatabase::class.java,
+                    GameDayDatabase::class.java,
                     "scoring_database"
                 ).createFromAsset("database/ScoringDB.db")
                     .fallbackToDestructiveMigration()

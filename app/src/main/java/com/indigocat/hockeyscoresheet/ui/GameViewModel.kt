@@ -1,18 +1,29 @@
 package com.indigocat.hockeyscoresheet.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.indigocat.hockeyscoresheet.data.api.model.Game
 import com.indigocat.hockeyscoresheet.data.repository.GameRepository
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GameViewModel(gameRepository: GameRepository): ViewModel() {
+class GameViewModel @Inject constructor(private val gameRepository: GameRepository) : ViewModel() {
 
-    private var gameId: Int? = null
+    private var _gameId = MutableLiveData<String?>(null)
+    val gameDetails: MutableLiveData<Game?> = MutableLiveData(null)
 
-    fun setGameId(gameId: Int) {
-        this.gameId = gameId
-        getGameInfo(gameId)
+    fun setGameId(id: String) {
+        _gameId.value = id
+        getGame(id)
     }
 
-    private fun getGameInfo(gameId: Int) {
+    fun getGame(id: String) {
+        viewModelScope.launch {
+            gameRepository.getGame(id)
+        }
 
     }
+
+
 }

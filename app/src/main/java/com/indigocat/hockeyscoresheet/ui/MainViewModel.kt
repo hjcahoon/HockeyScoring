@@ -6,8 +6,11 @@ import androidx.lifecycle.asLiveData
 import com.indigocat.hockeyscoresheet.data.api.model.Game
 import com.indigocat.hockeyscoresheet.data.database.entities.Player
 import com.indigocat.hockeyscoresheet.data.repository.GameRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val gameRepository: GameRepository
 ): ViewModel() {
 

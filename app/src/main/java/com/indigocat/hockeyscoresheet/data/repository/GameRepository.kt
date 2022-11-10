@@ -5,19 +5,21 @@ import com.indigocat.hockeyscoresheet.data.api.model.Facility
 import com.indigocat.hockeyscoresheet.data.api.model.Game
 import com.indigocat.hockeyscoresheet.data.api.model.Person
 import com.indigocat.hockeyscoresheet.data.api.model.Team
-import com.indigocat.hockeyscoresheet.data.database.ScoringDatabase
-import com.indigocat.hockeyscoresheet.ui.extensions.getTodayString
+import com.indigocat.hockeyscoresheet.data.api.scoringService
+import com.indigocat.hockeyscoresheet.data.database.GameDayDatabase
+import com.indigocat.hockeyscoresheet.ui.extensions.getTodayWithTimeString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class GameRepository(
-    private val scoringRepo: ScoringRepository,
-    private val database: ScoringDatabase
-    ) {
+class GameRepository @Inject constructor(
+    private val database: GameDayDatabase,
+    private val scoringApi: ScoringRepository = scoringService
+) {
 
 
     fun getAllPlayers() = database.playerDao().getAllPlayers()
@@ -28,18 +30,18 @@ class GameRepository(
 
 
 
-//    suspend fun getGame(id: String) : Game? {
-//        var game: Game?
-//        withContext(Dispatchers.IO) {
-//            val dbGame = database.gameDao().getGameById(id)
-//            game = if (dbGame == null) {
-//                scoringRepo.getGame(id)
-//            } else {
-//                fillInGameDetails(dbGame)
-//            }
-//        }
-//        return game
-//    }
+    suspend fun getGame(id: String) : Game? {
+        var game: Game?
+        withContext(Dispatchers.IO) {
+            val dbGame = database.gameDao().getGameById(id)
+            game = if (dbGame == null) {
+                scoringApi.getGame(id)
+            } else {
+                fillInGameDetails(dbGame)
+            }
+        }
+        return game
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getNextGames(): Flow<List<Game>> {
@@ -63,7 +65,7 @@ class GameRepository(
             awayTeam,
             Facility(game.id, "", "", "", "", ""),
             "",
-            game.dateTime ?: getTodayString(),
+            game.dateTime ?: getTodayWithTimeString(),
             game.homeScore,
             game.awayScore
         )

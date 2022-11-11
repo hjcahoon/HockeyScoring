@@ -11,6 +11,7 @@ data class Team(
     val nickname: String?,
     val headCoach: String? = null,
     val venue: String? = null,
+    val logoUrl: String? = null,
     val wins: Int = 0,
     val losses: Int = 0
 )

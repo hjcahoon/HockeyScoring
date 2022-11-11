@@ -11,7 +11,7 @@ interface PlayerAndTeamDao {
     @Insert
     fun insert(item: PlayerAndTeam)
 
-    @Query("SELECT * FROM playerAndTeam WHERE teamId IS :teamId")
-    fun getPlayersForTeam(teamId: String): List<PlayerAndTeam>
+    @Query("SELECT playerId FROM playerAndTeam WHERE teamId IS :teamId")
+    fun getPlayersForTeam(teamId: String): List<String>
 
 }

@@ -15,7 +15,7 @@ import com.indigocat.hockeyscoresheet.data.api.model.Game
 @Composable
 fun GameDayNavHost(
     navController: NavHostController,
-    games: List<Game>?,
+    games: List<Game>,
     modifier: Modifier
 ) {
     NavHost(

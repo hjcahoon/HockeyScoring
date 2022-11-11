@@ -33,12 +33,12 @@ fun ScoreGameScreen() {
                 TeamInfo(
                     teamName = "Resurrection Christian",
                     iconUrl = "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/2c6825fd-aa97-404d-34d2-a01236d06000/128",
-                    modifier = Modifier.weight(1f),
+                    Modifier.weight(1f)
                 )
                 TeamInfo(
                     teamName = "Monarch Coyotes Varsity",
                     iconUrl = "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/128f7a1e-f8f1-45f3-a2ad-8d2f04230700/128",
-                    modifier = Modifier.weight(1f)
+                    Modifier.weight(1f)
                 )
             }
             Row(modifier = Modifier.padding(12.dp)) {

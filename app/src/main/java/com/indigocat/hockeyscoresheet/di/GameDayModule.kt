@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.indigocat.hockeyscoresheet.data.api.scoringService
 import com.indigocat.hockeyscoresheet.data.database.GameDayDatabase
+import com.indigocat.hockeyscoresheet.data.repository.GameRepository
+import com.indigocat.hockeyscoresheet.data.repository.PlayerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +32,18 @@ object GameDayModule {
     @Singleton
     @Provides
     fun provideGameDao(db: GameDayDatabase) =  db.gameDao()
+
+    @Singleton
+    @Provides
+    fun provideGameRepository(
+        db: GameDayDatabase,
+    ) = GameRepository(db, scoringService)
+
+    @Singleton
+    @Provides
+    fun providePlayerRepository(
+        db: GameDayDatabase,
+    ) = PlayerRepository(db, scoringService)
 
     @Singleton
     @Provides

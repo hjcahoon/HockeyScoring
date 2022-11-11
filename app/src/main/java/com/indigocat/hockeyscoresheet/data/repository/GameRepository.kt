@@ -10,7 +10,6 @@ import com.indigocat.hockeyscoresheet.data.database.GameDayDatabase
 import com.indigocat.hockeyscoresheet.ui.extensions.getTodayWithTimeString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.withContext
@@ -29,33 +28,30 @@ class GameRepository @Inject constructor(
     fun getDBGames() = database.gameDao().getAllGames()
 
 
-
-    suspend fun getGame(id: String) : Game? {
-        var game: Game?
-        withContext(Dispatchers.IO) {
+    suspend fun getGame(id: String): Game? {
+        return withContext(Dispatchers.IO) {
             val dbGame = database.gameDao().getGameById(id)
-            game = if (dbGame == null) {
+            if (dbGame == null) {
                 scoringApi.getGame(id)
             } else {
                 fillInGameDetails(dbGame)
             }
         }
-        return game
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getNextGames(): Flow<List<Game>> {
         val games = database.gameDao().getAllGames()
-                .mapLatest {
-                    it.mapNotNull { game ->
-                        fillInGameDetails(game)
-                    }
+            .mapLatest {
+                it.mapNotNull { game ->
+                    fillInGameDetails(game)
                 }
+            }
 
         return games
     }
 
-    private suspend fun fillInGameDetails(game: com.indigocat.hockeyscoresheet.data.database.entities.Game) : Game? {
+    private suspend fun fillInGameDetails(game: com.indigocat.hockeyscoresheet.data.database.entities.Game): Game? {
         val homeTeam = getTeamDetails(game.homeTeamId)
         val awayTeam = getTeamDetails(game.awayTeamId)
         if (homeTeam == null || awayTeam == null) return null
@@ -71,24 +67,27 @@ class GameRepository @Inject constructor(
         )
     }
 
-    private suspend fun getTeamDetails(teamId: String) : Team? {
-        var team : Team?
-        coroutineScope {
-            withContext(Dispatchers.IO) {
+    private suspend fun getTeamDetails(teamId: String): Team? {
+        return withContext(Dispatchers.IO) {
 
-                val dbTeam = database.teamDao().getTeam(teamId)
-                val nameSplit = dbTeam.headCoach?.split(" ")
-                val headCoach = Person(teamId, givenName = nameSplit?.get(0) ?: " ", familyName =  nameSplit?.get(1) ?: "")
-                team = Team(
-                  teamId,
-                  dbTeam.name,
-                  dbTeam.nickname,
-                  headCoach,
-                  dbTeam.venue
-              )
-            }
+            val dbTeam = database.teamDao().getTeam(teamId)
+            val nameSplit = dbTeam.headCoach?.split(" ")
+            val headCoach = Person(
+                teamId,
+                givenName = nameSplit?.get(0) ?: " ",
+                familyName = nameSplit?.get(1) ?: ""
+            )
+            Team(
+                teamId,
+                dbTeam.name,
+                dbTeam.nickname,
+                headCoach,
+                dbTeam.venue,
+                dbTeam.logoUrl,
+                dbTeam.wins,
+                dbTeam.losses
+            )
         }
-        return team
     }
 
 //    @OptIn(ExperimentalCoroutinesApi::class)
@@ -131,10 +130,6 @@ class GameRepository @Inject constructor(
 //            Infraction.valueOf(penalty.infraction)
 //
 //        )
-//    }
-
-//    private fun getPlayer(id: String): Player? {
-//        return database.playerDao().getPlayer(id)?.toDataPlayer()
 //    }
 
 

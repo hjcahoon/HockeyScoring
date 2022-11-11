@@ -59,13 +59,13 @@ fun Main(
 ) {
     val currentGames = viewModel.currentGames.observeAsState().value
     val navController = rememberNavController()
-
-
-    HockeyScoreSheetTheme {
-        Surface(
-            color = MaterialTheme.colorScheme.background
-        ) {
-            GameDayNavHost(navController = navController, currentGames, modifier = Modifier)
+    if (currentGames != null) {
+        HockeyScoreSheetTheme {
+            Surface(
+                color = MaterialTheme.colorScheme.background
+            ) {
+                GameDayNavHost(navController = navController, currentGames, modifier = Modifier)
+            }
         }
     }
 
@@ -75,9 +75,8 @@ fun Main(
 @Composable
 fun ListOfGames(
     navController: NavHostController,
-    games: List<Game>?
+    games: List<Game>
 ) {
-    if (games == null) return
 
     LazyColumn {
         stickyHeader {

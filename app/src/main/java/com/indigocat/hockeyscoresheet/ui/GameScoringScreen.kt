@@ -28,7 +28,7 @@ fun ScoreGameScreen() {
     Surface(
         color = MaterialTheme.colorScheme.background
     ) {
-        Column{
+        Column {
             Row(modifier = Modifier.padding(12.dp, 16.dp)) {
                 TeamInfo(
                     teamName = "Resurrection Christian",

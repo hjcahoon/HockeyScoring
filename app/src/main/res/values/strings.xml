@@ -28,4 +28,6 @@
 
     <string name="team_record">%1$d-%2$d</string>
     <string name="upcoming_games">Upcoming Games</string>
+
+    <string name="team_logo_content_description">%1$s logo</string>
 </resources>

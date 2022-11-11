@@ -23,9 +23,9 @@ class GameRepository @Inject constructor(
 
     fun getAllPlayers() = database.playerDao().getAllPlayers()
 
-    fun getDBTeams() = database.teamDao().getAllTeams()
-
-    fun getDBGames() = database.gameDao().getAllGames()
+//    fun getDBTeams() = database.teamDao().getAllTeams()
+//
+//    fun getDBGames() = database.gameDao().getAllGames()
 
 
     suspend fun getGame(id: String): Game? {
@@ -43,7 +43,7 @@ class GameRepository @Inject constructor(
     fun getNextGames(): Flow<List<Game>> {
         val games = database.gameDao().getAllGames()
             .mapLatest {
-                it.mapNotNull { game ->
+                it.map { game ->
                     fillInGameDetails(game)
                 }
             }
@@ -51,10 +51,9 @@ class GameRepository @Inject constructor(
         return games
     }
 
-    private suspend fun fillInGameDetails(game: com.indigocat.hockeyscoresheet.data.database.entities.Game): Game? {
+    private suspend fun fillInGameDetails(game: com.indigocat.hockeyscoresheet.data.database.entities.Game): Game {
         val homeTeam = getTeamDetails(game.homeTeamId)
         val awayTeam = getTeamDetails(game.awayTeamId)
-        if (homeTeam == null || awayTeam == null) return null
         return Game(
             game.id,
             homeTeam,
@@ -67,7 +66,7 @@ class GameRepository @Inject constructor(
         )
     }
 
-    private suspend fun getTeamDetails(teamId: String): Team? {
+    private suspend fun getTeamDetails(teamId: String): Team {
         return withContext(Dispatchers.IO) {
 
             val dbTeam = database.teamDao().getTeam(teamId)

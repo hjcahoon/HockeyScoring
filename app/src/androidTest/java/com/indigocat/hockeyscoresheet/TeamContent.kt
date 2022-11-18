@@ -9,20 +9,16 @@ object TeamContent {
         "1",
         "Monarch Gold",
         "Coyotes",
-        headCoach = MonarchContent.headCoach,
-        assistantCoaches = MonarchContent.assistantCoaches,
-        players = MonarchContent.players,
-        games = emptyList<Game>()
+        headCoach = MonarchContent.headCoach
+
     )
 
     val avalanche = Team(
         "2",
         "Colorado Avalanche",
         "Avs",
-        Avalanche.headCoach,
-        Avalanche.assistantCoaches,
-        Avalanche.players,
-        emptyList()
+        Avalanche.headCoach
+
     )
 
     val game1 = Game(

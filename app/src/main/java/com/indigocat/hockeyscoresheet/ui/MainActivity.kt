@@ -26,12 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.indigocat.hockeyscoresheet.R
-import com.indigocat.hockeyscoresheet.data.api.model.Facility
 import com.indigocat.hockeyscoresheet.data.api.model.Game
-import com.indigocat.hockeyscoresheet.data.api.model.Person
-import com.indigocat.hockeyscoresheet.data.api.model.Team
 import com.indigocat.hockeyscoresheet.data.database.entities.Player
 import com.indigocat.hockeyscoresheet.ui.components.GameCard
+import com.indigocat.hockeyscoresheet.ui.components.data.games
+import com.indigocat.hockeyscoresheet.ui.navigation.GameDayNavHost
+import com.indigocat.hockeyscoresheet.ui.navigation.navigateToGameSummary
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
 import com.indigocat.hockeyscoresheet.ui.theme.light_surface
 import dagger.hilt.android.AndroidEntryPoint
@@ -120,24 +120,12 @@ fun ListOfPlayer(players: List<Player>) {
 @Composable
 fun MainPreview() {
 
-    val games = listOf(
-        Game(
-            "123",
-            Team("1", "Colorado Avalanche", "Avalanche", Person("1", "Jared", "Bednar"), "Ball Arena"),
-            Team("2", "Toronto Maple Leafs", "Maple Leafs", Person("1", "Sheldon", "Keefe"), "Scotiabank Arena"),
-            Facility("123", "Ball Arena", "", "", "", ""),
-            null, "2022-11-14:7:30Z+4"
-        ),
-        Game(
-            "123",
-            Team("3", "Calgary Flames", "Flames", Person("1", "Bryan", "Sutter"), "The Saddledome"),
-            Team("1", "Colorado Avalanche", "Avalanche", Person("1", "Jared", "Bednar"), "Ball Arena"),
-            Facility("123", "The Saddledome", "", "", "", ""),
-            null, "2022-11-14:7:30Z+4", 3, 6
-        )
-    )
+
     HockeyScoreSheetTheme {
         val navController = rememberNavController()
         ListOfGames(games = games, navController = navController )
     }
 }
+
+
+

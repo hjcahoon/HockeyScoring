@@ -7,11 +7,12 @@ import androidx.room.PrimaryKey
 data class Goal(
     @PrimaryKey
     val id: String,
+    val gameId: String,
+    val teamId: String,
     val goalScorer: String,
     val assist1: String? = null,
     val assist2: String? = null,
     val time: Int,
     val period: Int,
-    val gameId: String,
     val apposingGoalie: String? = null
 )

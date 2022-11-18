@@ -3,7 +3,6 @@ package com.indigocat.hockeyscoresheet
 import com.indigocat.hockeyscoresheet.data.api.model.Facility
 import com.indigocat.hockeyscoresheet.data.api.model.Person
 import com.indigocat.hockeyscoresheet.data.api.model.Player
-import com.indigocat.hockeyscoresheet.data.api.model.Position
 
 object Avalanche {
     val headCoach = Person(
@@ -30,168 +29,168 @@ object Avalanche {
             "Anton",
             "Blidh",
             81,
-            Position.FORWARD
+            "LW"
         ),
         Player(
             "123-126-111",
             "Andrew",
             "Cogliano",
             11,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-112",
             "J.T.",
             "Compher",
             37,
-            Position.FORWARD
+            "C"
         ),
         Player(
             "123-126-113",
             "Darren",
             "Helm",
             43,
-            Position.FORWARD
+            "D"
         ),
         Player(
             "123-126-114",
             "Charles",
             "Hudon",
             54,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-115",
             "Gabriel",
             "Landeskog",
             92,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-116",
             "Artturi",
             "Lehkonen",
             62,
-            Position.FORWARD
+            "LW"
         ),
         Player(
             "123-126-117",
             "Nathan",
             "Mackinnon",
             29,
-            Position.FORWARD
+            "C"
         ),
         Player(
             "123-126-118",
             "Alex",
             "Newhook",
             18,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-119",
             "Valeri",
             "Nichuskin",
             13,
-            Position.FORWARD
+            "LW"
         ),
         Player(
             "123-126-120",
             "Logan",
             "O'Connor",
             25,
-            Position.FORWARD
+            "C"
         ),
         Player(
             "123-126-1210",
             "Lucas",
             "Sedlak",
             45,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-122",
             "Mikko",
             "Rantanen",
             96,
-            Position.FORWARD
+            "RW"
         ),
         Player(
             "123-126-123",
             "Spencer",
             "Smallman",
             75,
-            Position.FORWARD
+            "LW"
         ),
         Player(
             "123-126-124",
             "Bowem",
             "Byram",
             4,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-124",
             "Samuel",
             "Girard",
             49,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-125",
             "Brad",
             "Hunt",
             77,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-126",
             "Devon",
             "Toews",
             7,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-127",
             "Erik",
             "Johnson",
             6,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-128",
             "Kurtis",
             "MacDermid",
             56,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-129",
             "Cale",
             "Makar",
             8,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-130",
             "Josh",
             "Manson",
             42,
-            Position.DEFENCE
+            "D"
         ),
         Player(
             "123-126-101",
             "Pavel",
             "Francouz",
             39,
-            Position.GOALIE
+            "G"
         ),
         Player(
             "123-126-102",
             "Alexandar",
             "Georgiev",
             40,
-            Position.GOALIE
+            "G"
         )
     )
 

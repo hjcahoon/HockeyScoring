@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.ui
+package com.indigocat.hockeyscoresheet.ui.games.scoring
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,9 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.indigocat.hockeyscoresheet.R
-import com.indigocat.hockeyscoresheet.ui.extensions.getNumberAndName
 import com.indigocat.hockeyscoresheet.data.api.model.Player
-import com.indigocat.hockeyscoresheet.data.api.model.PointType
 import com.indigocat.hockeyscoresheet.ui.extensions.getNumberAndName
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
 import timber.log.Timber
@@ -93,7 +91,6 @@ fun EditGoalContent() {
                     suggestions = players,
                     modifier = Modifier,
                     onPlayerSelected = onPlayerSelected,
-                    pointType = PointType.GOAL,
                     label = { Text(stringResource(id = R.string.goal_scorer)) }
                 )
             }
@@ -161,9 +158,8 @@ fun Label(stringResourceId: Int) {
 fun AutoCompletePlayerTextView(
     suggestions: List<Player>,
     modifier: Modifier,
-    onPlayerSelected: (String, PointType) -> Unit,
-    label: @Composable (() -> Unit)? = null,
-    pointType: PointType
+    onPlayerSelected: (String) -> Unit,
+    label: @Composable (() -> Unit)? = null
 ) {
     Column(modifier = modifier) {
         val selectedPlayerIndex = rememberSaveable { mutableStateOf(0) }
@@ -195,7 +191,7 @@ fun AutoCompletePlayerTextView(
                     DropdownMenuItem(
                         text = { Text(suggestions[index].getNumberAndName(LocalContext.current)) },
                         onClick = {
-                            onPlayerSelected(player.id, pointType)
+                            onPlayerSelected(player.id)
                             showDropdown.value = false
                             selectedPlayerIndex.value = index
                         }
@@ -206,8 +202,8 @@ fun AutoCompletePlayerTextView(
     }
 }
 
-val onPlayerSelected = { playerId: String, pointType: PointType ->
-    Timber.d("Selected $playerId goalType $pointType")
+val onPlayerSelected = { playerId: String  ->
+    Timber.d("Selected $playerId")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

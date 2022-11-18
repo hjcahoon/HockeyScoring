@@ -1,11 +1,13 @@
-package com.indigocat.hockeyscoresheet.ui
+package com.indigocat.hockeyscoresheet.ui.games
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.indigocat.hockeyscoresheet.data.api.model.Game
+import com.indigocat.hockeyscoresheet.data.api.model.Goal
 import com.indigocat.hockeyscoresheet.data.api.model.Player
 import com.indigocat.hockeyscoresheet.data.repository.GameRepository
 import com.indigocat.hockeyscoresheet.data.repository.PlayerRepository
@@ -23,6 +25,8 @@ class GameViewModel @Inject constructor(
     private var _gameId = MutableLiveData<String?>(null)
     private val _gameDetails = MutableLiveData<Game>()
     val gameDetails: LiveData<Game?> = _gameDetails
+    val _goals: MutableLiveData<List<Goal>> = MutableLiveData(emptyList())
+
 
 
     fun setGameId(id: String) {
@@ -48,13 +52,11 @@ class GameViewModel @Inject constructor(
         MutableLiveData(players)
     }
 
-    fun getTeamRoster(teamId: String): List<Player>? {
-        var players: List<Player>? = null
-        viewModelScope.launch(Dispatchers.IO) {
-            playerRepository.getPlayersForTeam(teamId)
 
+    val goals = _gameId.switchMap {
+        it?.let { gameId ->
+            gameRepository.getGoalsForGame(gameId).asLiveData()
         }
-        return players
     }
 
     val awayRoster = gameDetails.switchMap {

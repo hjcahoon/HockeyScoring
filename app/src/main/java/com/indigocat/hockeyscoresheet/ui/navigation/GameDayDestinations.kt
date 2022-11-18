@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.ui
+package com.indigocat.hockeyscoresheet.ui.navigation
 
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
@@ -14,7 +14,7 @@ object CurrentGames: GameDayDestinations {
     override val arguments = emptyList<NamedNavArgument>()
 
 }
-object GameSummary: GameDayDestinations {
+object GameSummaryDestination: GameDayDestinations {
     override val route = "game_summary"
     const val gameIdArg = "game_id"
     val routeWithArgs = "$route/{$gameIdArg}"
@@ -23,12 +23,18 @@ object GameSummary: GameDayDestinations {
     )
 }
 
-object ScoreGame: GameDayDestinations {
+object ScoreGameDestination: GameDayDestinations {
     override val route = "score_game"
-    override val arguments = emptyList<NamedNavArgument>()
+    const val gameIdArg = "game_id"
+    val routeWithArgs = "$route/{$gameIdArg}"
+    override val arguments = listOf(
+        navArgument(GameSummaryDestination.gameIdArg) { type = NavType.StringType }
+    )
 }
 
 object EditGoal: GameDayDestinations {
     override val route = "edit_goal/{homeId}?goalieId={goalieId}"
     override val arguments = emptyList<NamedNavArgument>()
 }
+
+

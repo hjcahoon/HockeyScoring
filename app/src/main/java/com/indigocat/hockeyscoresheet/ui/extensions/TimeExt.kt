@@ -59,12 +59,16 @@ class DateExt {
             return timeFormatter!!
         }
 
-        fun getPrettyTimeFormatter(): DateFormat {
+        fun getPrettyTimeFormatter(locale: Locale? = null): DateFormat {
             if (prettyTimeFormatter == null) {
-                prettyTimeFormatter = SimpleDateFormat("E MMM dd h:mma", Locale.getDefault())
+                prettyTimeFormatter = SimpleDateFormat(
+                    "E MMM dd h:mma",
+                    locale ?: Locale.getDefault()
+                )
             }
             return prettyTimeFormatter!!
         }
+
     }
 }
 

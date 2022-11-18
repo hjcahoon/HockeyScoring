@@ -22,6 +22,7 @@
     <string name="power_play_abbv">PP</string>
     <string name="short_handed_abbv">SH</string>
     <string name="empty_net_abbv">EN</string>
+    <string name="goal_type_paren">(%1$s)</string>
 
     <string name="select_player">Select Player</string>
     <string name="bench_penalty">Bench Penalty</string>
@@ -30,4 +31,8 @@
     <string name="upcoming_games">Upcoming Games</string>
 
     <string name="team_logo_content_description">%1$s logo</string>
+    <string name="city_state">%1$s, %2$s</string>
+    <string name="game_score">%1$d - %2$d</string>
+
+    <string name="team_chooser_title">Select a team:</string>
 </resources>

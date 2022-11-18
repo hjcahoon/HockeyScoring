@@ -2,11 +2,11 @@ package com.indigocat.hockeyscoresheet.ui.components
 
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,8 +28,13 @@ import com.indigocat.hockeyscoresheet.data.api.model.Facility
 import com.indigocat.hockeyscoresheet.data.api.model.Game
 import com.indigocat.hockeyscoresheet.data.api.model.Person
 import com.indigocat.hockeyscoresheet.data.api.model.Team
+import com.indigocat.hockeyscoresheet.ui.components.style.FinalScore
+import com.indigocat.hockeyscoresheet.ui.components.style.Header5
+import com.indigocat.hockeyscoresheet.ui.components.style.Label1
+import com.indigocat.hockeyscoresheet.ui.components.style.Label3
 import com.indigocat.hockeyscoresheet.ui.extensions.getPrettyDate
 import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import java.util.*
 
 
 @ExperimentalMaterial3Api
@@ -55,7 +60,7 @@ fun GameCard(
 @Composable
 fun GameHeader(game: Game) {
     Row(Modifier.padding(8.dp, 4.dp)) {
-        Text(getPrettyDate(game.startTime) ?: "")
+        Label1(getPrettyDate(game.startTime) ?: "")
         Spacer(modifier = Modifier.weight(1f))
         Text(game.facility?.name ?: "")
     }
@@ -80,15 +85,15 @@ fun TeamGameTitle(team: Team, score: Int?) {
             ),
             placeholder = painterResource(id = R.drawable.ic_hockey)
         )
-        Text(
+        Label3(
             team.name,
             Modifier.padding(4.dp, 0.dp, 8.dp, 0.dp)
         )
         Spacer(modifier = Modifier.weight(1f))
         if (score != null) {
-            Text(score.toString())
+            Label3(score.toString())
         } else {
-            Text(LocalContext.current.getString(R.string.team_record, team.wins, team.losses))
+            Label3(LocalContext.current.getString(R.string.team_record, team.wins, team.losses))
         }
     }
 }
@@ -130,40 +135,53 @@ fun GameScore(game: Game) {
     val awayTeam = game.awayTeam
 
     Row(
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        Modifier
+            .fillMaxWidth()
+            .height(90.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
 
     ) {
         val context = LocalContext.current
-        Box(modifier = Modifier.size(40.dp, 40.dp)) {
-            AsyncImage(
-                modifier = Modifier.matchParentSize(),
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(awayTeam.logoUrl)
-                    .decoderFactory(SvgDecoder.Factory())
-                    .crossfade(true)
-                    .build(),
-                placeholder = painterResource(id = R.drawable.ic_hockey),
-                contentDescription = context.getString(
-                    R.string.team_logo_content_description,
-                    awayTeam.name
-                )
-            )
-        }
 
-       // Text(game.awayTeam.name, Modifier.align(Alignment.CenterVertically))
-        Text(
-            (game.awayScore ?: " ").toString(),
-            Modifier.align(Alignment.CenterVertically).padding(10.dp, 0.dp)
-        )
-        Text("-", Modifier.align(Alignment.CenterVertically).padding(10.dp, 0.dp))
-        Text(
-            (game.homeScore ?: " ").toString(),
-            Modifier.align(Alignment.CenterVertically).padding(10.dp, 0.dp)
-        )
-       // Text(game.homeTeam.name, Modifier.align(Alignment.CenterVertically))
         AsyncImage(
-            modifier = Modifier.size(40.dp, 40.dp),
+            modifier = Modifier.size(80.dp, 80.dp),
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(awayTeam.logoUrl)
+                .decoderFactory(SvgDecoder.Factory())
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(id = R.drawable.ic_hockey),
+            contentDescription = context.getString(
+                R.string.team_logo_content_description,
+                awayTeam.name
+            )
+        )
+
+
+        // Text(game.awayTeam.name, Modifier.align(Alignment.CenterVertically))
+        FinalScore(
+            text = (game.awayScore ?: " ").toString(),
+            didWin = true,
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(20.dp, 0.dp),
+
+        )
+        Header5("-",
+            Modifier
+                .align(Alignment.CenterVertically)
+                .padding(10.dp, 0.dp))
+        FinalScore(
+            (game.homeScore ?: " ").toString(),
+            false,
+            Modifier
+                .align(Alignment.CenterVertically)
+                .padding(20.dp, 0.dp)
+        )
+
+        AsyncImage(
+            modifier = Modifier.size(80.dp, 80.dp),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(homeTeam.logoUrl)
                 .decoderFactory(SvgDecoder.Factory())
@@ -177,8 +195,22 @@ fun GameScore(game: Game) {
         )
 
     }
+}
+
+@Composable
+fun GameLocation(facility: Facility) {
+    Column {
+        facility.name?.let { Label1(text = it) }
+        Label1(text = facility.streetAddress)
+        Label1(text = LocalContext.current.getString(
+            R.string.city_state,
+            facility.city,
+            facility.state
+        ))
+    }
 
 }
+
 
 @Preview
 @Composable
@@ -192,6 +224,22 @@ fun PreviewGameScore() {
     )
     HockeyScoreSheetTheme {
         GameScore(game = game)
+    }
+}
+
+@Preview
+@Composable
+fun PreviewGameTimeAndLocation() {
+    val scotiaBankArena = Facility(
+        "123",
+        "Scotiabank Arena",
+        "40 Bay St",
+        "Toronto",
+        "Ontario",
+        "M5J 2X2"
+    )
+    HockeyScoreSheetTheme {
+        GameLocation(facility = scotiaBankArena)
     }
 }
 

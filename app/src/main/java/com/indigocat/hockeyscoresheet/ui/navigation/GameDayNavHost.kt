@@ -1,4 +1,4 @@
-package com.indigocat.hockeyscoresheet.ui
+package com.indigocat.hockeyscoresheet.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,6 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.indigocat.hockeyscoresheet.data.api.model.Game
+import com.indigocat.hockeyscoresheet.ui.ListOfGames
+import com.indigocat.hockeyscoresheet.ui.games.GameSummaryScreen
+import com.indigocat.hockeyscoresheet.ui.games.GameViewModel
+import com.indigocat.hockeyscoresheet.ui.games.ScoreGameScreen
 
 
 @Composable
@@ -34,11 +38,11 @@ fun GameDayNavHost(
         }
 
         composable(
-            route = GameSummary.routeWithArgs,
-            arguments = GameSummary.arguments
+            route = GameSummaryDestination.routeWithArgs,
+            arguments = GameSummaryDestination.arguments
         ) { backStackEntry ->
             val viewModel = hiltViewModel<GameViewModel>()
-            val gameId = backStackEntry.arguments?.getString(GameSummary.gameIdArg) ?: ""
+            val gameId = backStackEntry.arguments?.getString(GameSummaryDestination.gameIdArg) ?: ""
             GameSummaryScreen(
                 navController,
                 gameId,
@@ -47,6 +51,14 @@ fun GameDayNavHost(
                     navController.navigateToGameScoring(gameId)
                 }
             )
+        }
+
+        composable(
+            route = ScoreGameDestination.routeWithArgs,
+            arguments = ScoreGameDestination.arguments
+        ) { backStackEntry ->
+            val gameId = backStackEntry.arguments?.getString(GameSummaryDestination.gameIdArg) ?: ""
+            ScoreGameScreen(navController, gameId)
         }
     }
 }
@@ -70,9 +82,9 @@ fun NavHostController.navigateSingleTopTo(route: String) =
 
 
 fun NavHostController.navigateToGameSummary(gameId: String) {
-    this.navigateSingleTopTo("${GameSummary.route}/$gameId")
+    this.navigateSingleTopTo("${GameSummaryDestination.route}/$gameId")
 }
 
 fun NavHostController.navigateToGameScoring(gameId: String) {
-    this.navigateSingleTopTo("${ScoreGame.route}/$gameId")
+    this.navigateSingleTopTo("${ScoreGameDestination.route}/$gameId")
 }

@@ -3,6 +3,7 @@ package com.indigocat.hockeyscoresheet.data.api.model
 data class Goal(
     val id: String,
     val gameId: String,
+    val teamId: String,
     val period: Int,
     val time: Int,
     val scorer: Player,
@@ -20,8 +21,3 @@ enum class PlayType {
     EmptyNet
 }
 
-enum class PointType {
-    GOAL,
-    ASSIST1,
-    ASSIST2
-}

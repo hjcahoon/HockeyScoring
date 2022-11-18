@@ -17,7 +17,7 @@ class PlayerRepository @Inject constructor(
     }
 
     suspend fun getPlayersForTeam(id: String): List<Player>? {
-        val playerIds =  database.playerTeamDao().getPlayersForTeam(id)
+        val playerIds = database.playerTeamDao().getPlayersForTeam(id)
 
         return database.playerDao().getPlayers(playerIds).map { it.toDataPlayer() }
     }

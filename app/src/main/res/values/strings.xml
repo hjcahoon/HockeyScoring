@@ -35,4 +35,5 @@
     <string name="game_score">%1$d - %2$d</string>
 
     <string name="team_chooser_title">Select a team:</string>
+    <string name="score_game_button_cd">Score Game</string>
 </resources>

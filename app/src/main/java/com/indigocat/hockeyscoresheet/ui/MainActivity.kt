@@ -32,7 +32,7 @@ import com.indigocat.hockeyscoresheet.ui.components.GameCard
 import com.indigocat.hockeyscoresheet.ui.components.data.games
 import com.indigocat.hockeyscoresheet.ui.navigation.GameDayNavHost
 import com.indigocat.hockeyscoresheet.ui.navigation.navigateToGameSummary
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 import com.indigocat.hockeyscoresheet.ui.theme.light_surface
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HockeyScoreSheetTheme {
+            GameDayTheme {
                 Main(viewModel)
             }
         }
@@ -60,7 +60,7 @@ fun Main(
     val currentGames = viewModel.currentGames.observeAsState().value
     val navController = rememberNavController()
     if (currentGames != null) {
-        HockeyScoreSheetTheme {
+        GameDayTheme {
             Surface(
                 color = MaterialTheme.colorScheme.background
             ) {
@@ -121,7 +121,7 @@ fun ListOfPlayer(players: List<Player>) {
 fun MainPreview() {
 
 
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         val navController = rememberNavController()
         ListOfGames(games = games, navController = navController )
     }

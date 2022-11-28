@@ -28,7 +28,7 @@ import com.indigocat.hockeyscoresheet.ui.components.data.avalanche
 import com.indigocat.hockeyscoresheet.ui.components.data.goals
 import com.indigocat.hockeyscoresheet.ui.components.data.mapleLeafs
 import com.indigocat.hockeyscoresheet.ui.components.data.penalties
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 
 @Composable
 fun ScoreGameScreen(
@@ -46,6 +46,7 @@ fun ScoreGameScreen(
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
+            val showTeamChooser = rememberSaveable { false }
             Column {
                 TeamsWithScore(
                     homeTeam = gameDetails.homeTeam,
@@ -71,10 +72,13 @@ fun ScoreGameScreen(
                     )
                     PenaltyList(penalties = penalties)
                 }
-
             }
         }
     }
+}
+
+fun showTeamChooserDialog() {
+
 }
 
 @Composable
@@ -109,7 +113,7 @@ fun ColumnHeader(title: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewScoreGame() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Column {
             TeamsWithScore(
                 homeTeam = avalanche,
@@ -135,7 +139,7 @@ fun PreviewScoreGame() {
 @Composable
 fun PreviewTeamsWithScore() {
 
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {

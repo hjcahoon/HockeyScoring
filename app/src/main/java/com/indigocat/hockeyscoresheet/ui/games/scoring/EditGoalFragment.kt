@@ -37,7 +37,7 @@ import androidx.fragment.app.Fragment
 import com.indigocat.hockeyscoresheet.R
 import com.indigocat.hockeyscoresheet.data.api.model.Player
 import com.indigocat.hockeyscoresheet.ui.extensions.getNumberAndName
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 import timber.log.Timber
 import java.util.*
 
@@ -51,7 +51,7 @@ class EditGoalFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                HockeyScoreSheetTheme {
+                GameDayTheme {
                     EditGoalContent()
                 }
             }
@@ -281,7 +281,7 @@ fun PlayerSelection() {
 @Composable
 @Preview(showBackground = true)
 fun EditGoalPreview() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         EditGoalContent()
     }
 }

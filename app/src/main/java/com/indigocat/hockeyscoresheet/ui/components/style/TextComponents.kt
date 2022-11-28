@@ -6,9 +6,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 import com.indigocat.hockeyscoresheet.ui.theme.dark_onSurface
 import com.indigocat.hockeyscoresheet.ui.theme.dark_onSurfaceVariant
 import com.indigocat.hockeyscoresheet.ui.theme.light_onSurface
@@ -36,12 +37,13 @@ fun Label2(text: String, modifier: Modifier = Modifier) {
 
 
 @Composable
-fun Label3(text: String, modifier: Modifier = Modifier) {
+fun Label3(text: String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Start) {
     Text(
         text,
         modifier,
         fontSize = 18.sp,
-        fontWeight = FontWeight(400)
+        fontWeight = FontWeight(400),
+        textAlign = textAlign
     )
 }
 
@@ -54,6 +56,7 @@ fun Label4(text: String, modifier: Modifier = Modifier) {
         fontWeight = FontWeight(400)
     )
 }
+
 @Composable
 fun Label5(text: String, modifier: Modifier = Modifier) {
     Text(
@@ -123,7 +126,7 @@ fun Header5(text: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun FinalScore(text: String, didWin: Boolean = false, modifier: Modifier = Modifier) {
+fun FinalScore(text: String, modifier: Modifier = Modifier, didWin: Boolean = false, ) {
     Text(
         text,
         modifier,
@@ -160,7 +163,7 @@ fun BoldText(text: String, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PreviewTextStyles() {
-    HockeyScoreSheetTheme() {
+    GameDayTheme {
         Column {
             BoldText(text = "BoldText")
             Label1(text = "Label1")
@@ -175,7 +178,7 @@ fun PreviewTextStyles() {
             Header4("Header 4")
             ContrastHeader(text ="ContrastHeader")
             FinalScore("FinalScore loss")
-            FinalScore("FinalScore win", true)
+            FinalScore("FinalScore win", Modifier, true)
         }
     }
 }

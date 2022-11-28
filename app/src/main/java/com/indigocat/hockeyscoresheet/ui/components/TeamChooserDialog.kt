@@ -17,7 +17,7 @@ import com.indigocat.hockeyscoresheet.data.api.model.Team
 import com.indigocat.hockeyscoresheet.ui.components.data.avalanche
 import com.indigocat.hockeyscoresheet.ui.components.data.mapleLeafs
 import com.indigocat.hockeyscoresheet.ui.components.style.Header3
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 
 
 @Composable
@@ -48,7 +48,7 @@ fun TeamChooserDialog(
 @Preview
 @Composable
 fun PreviewTeamChooserDialog() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         TeamChooserDialog(
             homeTeam = avalanche,
             awayTeam = mapleLeafs ,

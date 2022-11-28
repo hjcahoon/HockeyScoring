@@ -69,7 +69,7 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun HockeyScoreSheetTheme(
+fun GameDayTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {

@@ -33,7 +33,7 @@ import com.indigocat.hockeyscoresheet.ui.components.style.Header5
 import com.indigocat.hockeyscoresheet.ui.components.style.Label1
 import com.indigocat.hockeyscoresheet.ui.components.style.Label3
 import com.indigocat.hockeyscoresheet.ui.extensions.getPrettyDate
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 import java.util.*
 
 
@@ -102,7 +102,7 @@ fun TeamGameTitle(team: Team, score: Int?) {
 @Preview
 @Composable
 fun PreviewGameCard() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         GameCard(
             Game(
                 "123",
@@ -162,10 +162,11 @@ fun GameScore(game: Game) {
         // Text(game.awayTeam.name, Modifier.align(Alignment.CenterVertically))
         FinalScore(
             text = (game.awayScore ?: " ").toString(),
-            didWin = true,
+
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(20.dp, 0.dp),
+            didWin = true
 
         )
         Header5("-",
@@ -174,7 +175,6 @@ fun GameScore(game: Game) {
                 .padding(10.dp, 0.dp))
         FinalScore(
             (game.homeScore ?: " ").toString(),
-            false,
             Modifier
                 .align(Alignment.CenterVertically)
                 .padding(20.dp, 0.dp)
@@ -198,15 +198,21 @@ fun GameScore(game: Game) {
 }
 
 @Composable
-fun GameLocation(facility: Facility) {
-    Column {
+fun GameLocation(facility: Facility, modifier: Modifier = Modifier) {
+    Column(modifier) {
         facility.name?.let { Label1(text = it) }
-        Label1(text = facility.streetAddress)
-        Label1(text = LocalContext.current.getString(
-            R.string.city_state,
-            facility.city,
-            facility.state
-        ))
+        if (facility.streetAddress.isNotBlank()) {
+            Label1(text = facility.streetAddress)
+        }
+        if (facility.city.isNotBlank()) {
+            Label1(
+                text = LocalContext.current.getString(
+                    R.string.city_state,
+                    facility.city,
+                    facility.state
+                )
+            )
+        }
     }
 
 }
@@ -222,7 +228,7 @@ fun PreviewGameScore() {
         Facility("123", "The Saddledome", "", "", "", ""),
         null, "2022-11-14:7:30Z+4", 3, 6
     )
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         GameScore(game = game)
     }
 }
@@ -238,8 +244,10 @@ fun PreviewGameTimeAndLocation() {
         "Ontario",
         "M5J 2X2"
     )
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         GameLocation(facility = scotiaBankArena)
     }
 }
+
+
 

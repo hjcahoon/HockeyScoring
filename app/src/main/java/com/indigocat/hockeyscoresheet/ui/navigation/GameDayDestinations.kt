@@ -32,6 +32,7 @@ object ScoreGameDestination: GameDayDestinations {
     )
 }
 
+
 object EditGoal: GameDayDestinations {
     override val route = "edit_goal/{homeId}?goalieId={goalieId}"
     override val arguments = emptyList<NamedNavArgument>()

@@ -46,10 +46,7 @@ fun GameDayNavHost(
             GameSummaryScreen(
                 navController,
                 gameId,
-                viewModel,
-                onClickScoreGame = { gameId ->
-                    navController.navigateToGameScoring(gameId)
-                }
+                viewModel
             )
         }
 

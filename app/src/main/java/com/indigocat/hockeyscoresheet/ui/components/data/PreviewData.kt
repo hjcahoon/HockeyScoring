@@ -22,11 +22,18 @@ val games = listOf(
         null, "2022-11-14:7:30Z+4"
     ),
     Game(
-        "123",
+        "124",
         Team("3", "Calgary Flames", "Flames", Person("1", "Bryan", "Sutter"), "The Saddledome"),
         Team("1", "Colorado Avalanche", "Avalanche", Person("1", "Jared", "Bednar"), "Ball Arena"),
         Facility("123", "The Saddledome", "", "", "", ""),
         null, "2022-11-14:7:30Z+4", 3, 6
+    ),
+    Game(
+        "125",
+        Team("3", "Calgary Flames", "Flames", Person("1", "Bryan", "Sutter"), "The Saddledome"),
+        Team("1", "Colorado Avalanche", "Avalanche", Person("1", "Jared", "Bednar"), "Ball Arena"),
+        Facility("123", "The Saddledome", "", "", "", ""),
+        null, "2022-11-14:7:30Z+4", 2, 1
     )
 )
 val goals = listOf(

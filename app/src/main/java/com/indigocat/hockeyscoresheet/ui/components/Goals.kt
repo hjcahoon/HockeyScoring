@@ -36,40 +36,60 @@ import com.indigocat.hockeyscoresheet.ui.extensions.getAbbreviatedType
 import com.indigocat.hockeyscoresheet.ui.extensions.getNumberAndName
 import com.indigocat.hockeyscoresheet.ui.extensions.timeInPeriod
 import com.indigocat.hockeyscoresheet.ui.games.ColumnHeader
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 
 @Composable
-fun GoalsByPeriodSummary(goals: List<Goal>?, homeTeamId: String) {
+fun GoalsByPeriodSummary(goals: List<Goal>?, homeTeamId: String, modifier: Modifier = Modifier) {
     val homeGoals = goals?.filter { it.teamId == homeTeamId }
     val awayGoals = goals?.filter { it.teamId != homeTeamId }
     val homeGoalsByPeriod = homeGoals?.groupBy { it.period }
     val awayGoalsByPeriod = awayGoals?.groupBy { it.period }
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.background(
-           MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        RowLabel(text ="Goal Summary", Modifier.weight(3f) )
-        TableHeader(text = "1", Modifier.weight(.5f))
-        TableHeader(text = "2", Modifier.weight(.5f))
-        TableHeader(text = "3", Modifier.weight(.5f))
-        TableHeader(text="Final", Modifier.weight(.5f))
-    }
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        RowLabel(text ="Avalanche", Modifier.weight(3f) )
-        TableCell(text = (homeGoalsByPeriod?.get(1)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (homeGoalsByPeriod?.get(2)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (homeGoalsByPeriod?.get(3)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text=(homeGoals?.size ?: 0).toString(), Modifier.weight(.5f))
-    }
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        RowLabel(text ="Maple Leafs", Modifier.weight(3f) )
-        TableCell(text = (awayGoalsByPeriod?.get(1)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (awayGoalsByPeriod?.get(2)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (awayGoalsByPeriod?.get(3)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text=(awayGoals?.size ?: 0).toString(), Modifier.weight(.5f))
+    Column(modifier = modifier) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = modifier.background(
+                MaterialTheme.colorScheme.surfaceVariant
+            )
+        ) {
+            RowLabel(text = "Goal Summary", Modifier.weight(3f))
+            TableHeader(text = "1", Modifier.weight(.5f))
+            TableHeader(text = "2", Modifier.weight(.5f))
+            TableHeader(text = "3", Modifier.weight(.5f))
+            TableHeader(text = "Final", Modifier.weight(.5f))
+        }
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            RowLabel(text = "Avalanche", Modifier.weight(3f))
+            TableCell(
+                text = (homeGoalsByPeriod?.get(1)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (homeGoalsByPeriod?.get(2)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (homeGoalsByPeriod?.get(3)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(text = (homeGoals?.size ?: 0).toString(), Modifier.weight(.5f))
+        }
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            RowLabel(text = "Maple Leafs", Modifier.weight(3f))
+            TableCell(
+                text = (awayGoalsByPeriod?.get(1)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (awayGoalsByPeriod?.get(2)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (awayGoalsByPeriod?.get(3)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(text = (awayGoals?.size ?: 0).toString(), Modifier.weight(.5f))
+        }
     }
 }
 
@@ -95,49 +115,68 @@ fun TableCell(text: String, modifier: Modifier) {
 
 
 @Composable
-fun ShotSummaryByPeriod(shots: List<Shot>?, homeTeamId: String) {
+fun ShotSummaryByPeriod(shots: List<Shot>?, homeTeamId: String, modifier: Modifier = Modifier) {
     val homeShots = shots?.filter { it.teamId == homeTeamId }
     val awayShots = shots?.filter { it.teamId != homeTeamId }
     val homeShotsByPeriod = homeShots?.groupBy { it.periodId }
     val awayShotsByPeriod = awayShots?.groupBy { it.periodId }
+    Column(modifier = modifier) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.background(
+                MaterialTheme.colorScheme.surfaceVariant
+            )
+        ) {
+            RowLabel(text = "Shot Summary", Modifier.weight(3f))
+            TableHeader(text = "1", Modifier.weight(.5f))
+            TableHeader(text = "2", Modifier.weight(.5f))
+            TableHeader(text = "3", Modifier.weight(.5f))
+            TableHeader(text = "Total", Modifier.weight(.5f))
+        }
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.background(
-            MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        RowLabel(text ="Shot Summary", Modifier.weight(3f) )
-        TableHeader(text = "1", Modifier.weight(.5f))
-        TableHeader(text = "2", Modifier.weight(.5f))
-        TableHeader(text = "3", Modifier.weight(.5f))
-        TableHeader(text="Total", Modifier.weight(.5f))
-    }
-
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        RowLabel(text ="Avalanche", Modifier.weight(3f) )
-        TableCell(text = (homeShotsByPeriod?.get(1)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (homeShotsByPeriod?.get(2)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (homeShotsByPeriod?.get(3)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text=(homeShots?.size ?: 0).toString(), Modifier.weight(.5f))
-    }
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        RowLabel(text ="Maple Leafs", Modifier.weight(3f) )
-        TableCell(text = (awayShotsByPeriod?.get(1)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (awayShotsByPeriod?.get(2)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text = (awayShotsByPeriod?.get(3)?.size ?: 0).toString(), Modifier.weight(.5f))
-        TableCell(text=(awayShots?.size ?: 0).toString(), Modifier.weight(.5f))
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            RowLabel(text = "Avalanche", Modifier.weight(3f))
+            TableCell(
+                text = (homeShotsByPeriod?.get(1)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (homeShotsByPeriod?.get(2)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (homeShotsByPeriod?.get(3)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(text = (homeShots?.size ?: 0).toString(), Modifier.weight(.5f))
+        }
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            RowLabel(text = "Maple Leafs", Modifier.weight(3f))
+            TableCell(
+                text = (awayShotsByPeriod?.get(1)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (awayShotsByPeriod?.get(2)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(
+                text = (awayShotsByPeriod?.get(3)?.size ?: 0).toString(),
+                Modifier.weight(.5f)
+            )
+            TableCell(text = (awayShots?.size ?: 0).toString(), Modifier.weight(.5f))
+        }
     }
 
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun GoalDetailList(goals: List<Goal>, homeTeamId: String) {
+fun GoalDetailList(goals: List<Goal>, homeTeamId: String, modifier: Modifier = Modifier) {
     var currentPeriod = rememberSaveable { 0 }
     var homeScore = rememberSaveable { 0 }
     var awayScore = rememberSaveable { 0 }
-    LazyColumn {
+    LazyColumn(modifier = modifier) {
         stickyHeader {
             ColumnHeader(stringResource(id = R.string.scoring))
         }
@@ -230,7 +269,7 @@ fun GoalRow(goal: Goal, homeScore: Int, awayScore: Int, teamLogoUrl: String? = n
 @Composable
 fun PreviewGoalsByPeriodSummary() {
 
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(Modifier.background(MaterialTheme.colorScheme.background)) {
             Column {
                 GoalsByPeriodSummary(goals = goals, homeTeamId = "1")
@@ -243,7 +282,7 @@ fun PreviewGoalsByPeriodSummary() {
 @Composable
 fun PreviewShotsByPeriod() {
 
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(Modifier.background(MaterialTheme.colorScheme.background)) {
             Column {
                 ShotSummaryByPeriod(shots = shots, homeTeamId = "1")
@@ -255,7 +294,7 @@ fun PreviewShotsByPeriod() {
 @Preview
 @Composable
 fun PreviewScoringList() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(Modifier.background(MaterialTheme.colorScheme.background)) {
             GoalDetailList(goals = goals, "1")
         }
@@ -266,7 +305,7 @@ fun PreviewScoringList() {
 @Preview
 @Composable
 fun GoalRowPreview() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(Modifier.background(MaterialTheme.colorScheme.background)) {
             GoalRow(goals[0], 1, 2)
         }

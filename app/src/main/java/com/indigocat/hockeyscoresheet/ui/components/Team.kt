@@ -30,7 +30,7 @@ import com.indigocat.hockeyscoresheet.R
 import com.indigocat.hockeyscoresheet.data.api.model.Team
 import com.indigocat.hockeyscoresheet.ui.components.data.avalanche
 import com.indigocat.hockeyscoresheet.ui.components.style.Label3
-import com.indigocat.hockeyscoresheet.ui.theme.HockeyScoreSheetTheme
+import com.indigocat.hockeyscoresheet.ui.theme.GameDayTheme
 
 
 @Composable
@@ -78,9 +78,10 @@ fun TeamNamesFullWidth(homeName: String, awayName: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp),
-        horizontalArrangement = Arrangement.SpaceBetween) {
-        Label3(text = awayName, Modifier.padding(8.dp, 0.dp))
-        Label3(text = homeName, Modifier.padding(8.dp, 0.dp))
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Label3(text = awayName, Modifier.padding(8.dp, 0.dp), TextAlign.Center)
+        Label3(text = homeName, Modifier.padding(8.dp, 0.dp), TextAlign.Center)
     }
 }
 
@@ -124,7 +125,7 @@ fun TeamImageWithName(team: Team) {
 @Preview
 @Composable
 fun PreviewTeamInfo() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
       Row {
           TeamInfo(
               teamName = "Monarch Coyotes Varsity",
@@ -138,7 +139,7 @@ fun PreviewTeamInfo() {
 @Preview
 @Composable
 fun PreviewTeamNamesFullWidth() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         TeamNamesFullWidth(
             homeName = "Colorado Avalanche",
             awayName = "Toronto Maple Leafs"
@@ -149,7 +150,7 @@ fun PreviewTeamNamesFullWidth() {
 @Preview
 @Composable
 fun PreviewTeamButton() {
-    HockeyScoreSheetTheme {
+    GameDayTheme {
         Surface(Modifier.background(MaterialTheme.colorScheme.background)) {
             TeamButton(team = avalanche, onClick = { } )
         }
